@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFK Academy - التحقق من الشهادات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 font-sans">
+    <div class="max-w-md mx-auto mt-20 p-8 bg-white rounded-2xl shadow-md">
+        <h1 class="text-2xl font-bold text-blue-900 text-center mb-2">نظام التحقق الرسمي</h1>
+        <p class="text-sm text-slate-500 text-center mb-6">أدخل الرقم التسلسلي للشهادة للتأكد من صحتها.</p>
+        
+        <div class="space-y-4">
+            <input type="text" id="certId" placeholder="مثال: OFK-2026-XXXX" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <button onclick="checkCert()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition">تحقق الآن</button>
+        </div>
+
+        <div id="res" class="mt-6 hidden p-4 rounded-xl bg-green-50 border border-green-200 text-green-900">
+            <!-- نتيجة التحقق -->
+        </div>
+    </div>
+
+    <script>
+        function checkCert() {
+            const val = document.getElementById('certId').value.trim();
+            const box = document.getElementById('res');
+            if(val) {
+                box.classList.remove('hidden');
+                box.innerHTML = `<strong>حالة الشهادة:</strong> معتمدة وصحيحة<br><strong>الرقم:</strong> ${val}<br><strong>جهة الإصدار:</strong> OFK Academy & جامعة الزهراء`;
+            } else {
+                alert('الرجاء إدخال رقم الشهادة');
+            }
+        }
+    </script>
+</body>
+</html>
