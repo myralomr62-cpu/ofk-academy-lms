@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -56,15 +55,37 @@
         جميع الحقوق محفوظة © 2026 - أكاديمية أوفك بالشراكة مع جامعة الزهراء
     </footer>
 
-    <!-- كود بسيط لتجربة العرض التفاعلي -->
+    <!-- كود الاتصال الفعلي بـ Google Sheets API -->
     <script>
-        function verifyCertificate() {
+        const API_URL = "https://script.google.com/macros/s/AKfycbw_bj-zFvipXuBuZ67Te-MVnQU7dl0d0bx1jNzHlhE-H2YmSoqe2yCL0N7F1hHUaQuf";
+
+        async function verifyCertificate() {
             const inputVal = document.getElementById('certInput').value.trim();
             const resultBox = document.getElementById('resultBox');
-            if(inputVal !== "") {
-                resultBox.classList.remove('hidden');
-            } else {
+            
+            if(inputVal === "") {
                 alert('الرجاء إدخال رقم الشهادة المتسلسل أولاً');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}?id=${encodeURIComponent(inputVal)}`);
+                const data = await response.json();
+
+                if(data.status === "success") {
+                    // تعبئة البيانات الحقيقية القادمة من جوجل شيت
+                    document.getElementById('studentName').innerText = data.name;
+                    document.getElementById('courseName').innerText = data.course;
+                    
+                    // إظهار النتيجة الناجحة
+                    resultBox.classList.remove('hidden');
+                } else {
+                    alert('عذراً، رقم الشهادة غير موجود أو غير صحيح.');
+                    resultBox.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert('حدث خطأ أثناء الاتصال بالنظام، يرجى المحاولة لاحقاً.');
             }
         }
     </script>
