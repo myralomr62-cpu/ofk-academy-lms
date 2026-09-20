@@ -1,0 +1,14 @@
+/* OFK Academy Main Styles */
+body {
+    font-family: 'Traditional Arabic', Tahoma, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    direction: rtl;
+    text-align: right;
+}
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    padding: 24px;
+}
